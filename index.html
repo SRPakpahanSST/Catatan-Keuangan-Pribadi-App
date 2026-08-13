@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catatan Keuangan & Pribadi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        .container {
+            background: rgba(255,255,255,0.95);
+            border-radius: 30px;
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #2d3748;
+            margin-bottom: 10px;
+            font-size: 2.2rem;
+        }
+        .subtitle {
+            color: #718096;
+            margin-bottom: 30px;
+            font-size: 1rem;
+        }
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .menu-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px 20px;
+            text-decoration: none;
+            color: #2d3748;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .menu-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+            border-color: #667eea;
+        }
+        .menu-card .icon {
+            font-size: 3rem;
+            margin-bottom: 12px;
+            display: block;
+        }
+        .menu-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 6px;
+        }
+        .menu-card p {
+            color: #718096;
+            font-size: 0.85rem;
+            margin: 0;
+        }
+        .footer {
+            margin-top: 30px;
+            color: #a0aec0;
+            font-size: 0.8rem;
+        }
+        @media (max-width: 500px) {
+            .menu-grid { grid-template-columns: 1fr; }
+            .container { padding: 25px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📒 Aplikasi Pribadi</h1>
+        <p class="subtitle">Kelola keuangan dan catatan harian Anda dalam satu tempat</p>
+
+        <div class="menu-grid">
+            <a href="/keuangan_pribadi/" class="menu-card">
+                <span class="icon">💰</span>
+                <h3>Catatan Keuangan</h3>
+                <p>Kelola pemasukan & pengeluaran</p>
+            </a>
+            <a href="/catatan_pribadi/" class="menu-card">
+                <span class="icon">📝</span>
+                <h3>Catatan Pribadi</h3>
+                <p>Simpan ide, tugas, & catatan penting</p>
+            </a>
+        </div>
+
+        <p class="footer">APINDO AI Challenge 2026 • Teman Cerdas, Solusi Tuntas</p>
+    </div>
+</body>
+</html>
