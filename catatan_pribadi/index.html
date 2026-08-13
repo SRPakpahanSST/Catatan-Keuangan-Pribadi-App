@@ -1,13 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catatan Pribadi</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div id="root"></div>
-<script type="module" src="/src/index.jsx"></script>
+    <div class="notes-app">
+        <header>
+            <h1>📝 Catatan Pribadi</h1>
+            <a href="/" class="back-btn">← Kembali</a>
+        </header>
+
+        <div class="notes-controls">
+            <input type="text" id="searchNotes" placeholder="🔍 Cari catatan..." class="search-input">
+            <button id="addNoteBtn" class="add-btn">+ Tambah Catatan</button>
+        </div>
+
+        <div class="notes-grid" id="notesContainer">
+            <!-- Catatan akan muncul di sini -->
+        </div>
+
+        <!-- Modal untuk Tambah/Edit Catatan -->
+        <div class="modal" id="noteModal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h2 id="modalTitle">Tambah Catatan</h2>
+                <form id="noteForm">
+                    <input type="text" id="noteTitle" placeholder="Judul catatan" required>
+                    <textarea id="noteContent" placeholder="Isi catatan..." rows="5" required></textarea>
+                    <input type="date" id="noteDate">
+                    <select id="noteCategory">
+                        <option value="umum">Umum</option>
+                        <option value="ide">Ide</option>
+                        <option value="tugas">Tugas</option>
+                        <option value="penting">Penting</option>
+                    </select>
+                    <button type="submit" id="saveNoteBtn">Simpan</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
 </body>
 </html>
