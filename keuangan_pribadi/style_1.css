@@ -1,0 +1,689 @@
+/* =========================================================
+   Expense Tracker App — Premium Redesign for Portfolio
+   Modern, clean, glassmorphic, with smooth animations
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap');
+
+:root {
+  --bg-page: linear-gradient(135deg, #eef2f5 0%, #e0e7ef 100%);
+  --bg-card: rgba(255, 255, 255, 0.9);
+  --card-blur: blur(12px);
+  --text-dark: #1e293b;
+  --text-muted: #5b6e8c;
+  --accent-blue: #3b82f6;
+  --accent-light: rgba(59,130,246,0.12);
+  --color-income: #10b981;
+  --bg-income: rgba(16,185,129,0.15);
+  --color-expense: #ef4444;
+  --bg-expense: rgba(239,68,68,0.1);
+  --border-light: rgba(0,0,0,0.08);
+  --shadow-sm: 0 8px 20px rgba(0,0,0,0.03), 0 2px 6px rgba(0,0,0,0.05);
+  --shadow-md: 0 20px 35px -12px rgba(0,0,0,0.1);
+  --shadow-hover: 0 25px 40px -12px rgba(0,0,0,0.15);
+  --font-family: 'Inter', sans-serif;
+  --card-radius: 28px;
+  --transition: all 0.25s cubic-bezier(0.2, 0, 0, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg-page);
+  font-family: var(--font-family);
+  color: var(--text-dark);
+  padding: 2rem;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(2px);
+}
+
+/* scrollbar kustom */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #e2e8f0;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 10px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.tracker-app {
+  max-width: 1280px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
+
+/* semua kartu utama */
+.tracker-summary__balance,
+.tracker-summary__stat,
+.tracker-form-section__card,
+.tracker-search,
+.tracker-transaction-list {
+  background: var(--bg-card);
+  backdrop-filter: var(--card-blur);
+  border-radius: var(--card-radius);
+  border: 1px solid rgba(255,255,255,0.5);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+
+.tracker-summary__balance:hover,
+.tracker-summary__stat:hover,
+.tracker-form-section__card:hover,
+.tracker-search:hover,
+.tracker-transaction-list:hover {
+  box-shadow: var(--shadow-md);
+  border-color: rgba(255,255,255,0.8);
+}
+
+/* HEADER */
+.tracker-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0.5rem;
+  background: transparent;
+  backdrop-filter: blur(4px);
+  border-radius: 60px;
+  margin-bottom: 0.25rem;
+}
+
+.tracker-header__title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: linear-gradient(120deg, #1e293b, #2d3a4e);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.tracker-header__title span {
+  background: linear-gradient(120deg, #3b82f6, #8b5cf6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.tracker-header__user {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(255,255,255,0.5);
+  padding: 0.4rem 0.8rem 0.4rem 1.2rem;
+  border-radius: 60px;
+  backdrop-filter: blur(4px);
+}
+
+.tracker-header__greeting {
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.tracker-header__greeting strong {
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.tracker-header__date {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+/* Dropdown bulan */
+.tracker-month-select {
+  background: rgba(255,255,255,0.8);
+  border: 1px solid #cbd5e1;
+  border-radius: 30px;
+  padding: 0.3rem 0.8rem;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 0.8rem;
+  color: #1e293b;
+  cursor: pointer;
+  outline: none;
+  transition: var(--transition);
+}
+
+.tracker-month-select:hover {
+  background: white;
+  border-color: #94a3b8;
+}
+
+.tracker-header__avatar {
+  width: 42px;
+  height: 42px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  font-size: 1.2rem;
+}
+
+/* SUMMARY SECTION */
+.tracker-summary {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.tracker-summary__balance,
+.tracker-summary__stat {
+  padding: 1.5rem;
+  transition: var(--transition);
+}
+
+.tracker-summary__balance {
+  background: linear-gradient(125deg, #ffffff 0%, #f8fafc 100%);
+  backdrop-filter: blur(8px);
+}
+
+.tracker-summary__label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.tracker-summary__balance-amount {
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  background: linear-gradient(145deg, #0f172a, #334155);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.tracker-summary__stat-amount {
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.tracker-summary__stat-amount--income {
+  color: var(--color-income);
+}
+
+.tracker-summary__stat-amount--expense {
+  color: var(--color-expense);
+}
+
+/* FORM SECTION */
+.tracker-form-section__card {
+  padding: 1.6rem;
+}
+
+.tracker-form-section__heading {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin-bottom: 1.2rem;
+}
+
+.tracker-form {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr auto;
+  gap: 1rem;
+  align-items: end;
+}
+
+.tracker-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.tracker-form__label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+.tracker-form__input {
+  padding: 0.75rem 1rem;
+  border-radius: 18px;
+  border: 1px solid #e2e8f0;
+  background: white;
+  font-family: inherit;
+  font-size: 0.9rem;
+  transition: var(--transition);
+}
+
+.tracker-form__input:focus {
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
+  outline: none;
+}
+
+.tracker-form__submit {
+  background: linear-gradient(145deg, #1e293b, #0f172a);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 40px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.tracker-form__submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* SEARCH SECTION */
+.tracker-search {
+  padding: 1rem 1.5rem;
+}
+
+.tracker-search__form {
+  display: flex;
+  gap: 1rem;
+}
+
+.tracker-search__form .tracker-form__input {
+  flex: 1;
+  background: white;
+}
+
+.tracker-search__submit {
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  padding: 0 1.8rem;
+  border-radius: 40px;
+  font-weight: 600;
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.tracker-search__submit:hover {
+  background: #e2e8f0;
+  transform: scale(0.96);
+}
+
+/* TRANSACTION LISTS */
+.tracker-history__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.tracker-transaction-list {
+  padding: 1.2rem;
+}
+
+.tracker-transaction-list__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid rgba(0,0,0,0.05);
+  padding-bottom: 0.5rem;
+}
+
+.tracker-transaction-list__title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+}
+
+.tracker-transaction-list__container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  max-height: 460px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+/* transaction item (card dalam list) */
+.tracker-transaction-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem;
+  background: rgba(255,255,255,0.6);
+  border-radius: 24px;
+  transition: var(--transition);
+  border: 1px solid transparent;
+}
+
+.tracker-transaction-item:hover {
+  background: white;
+  border-color: #e2e8f0;
+  box-shadow: var(--shadow-sm);
+}
+
+.tracker-transaction-item__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+}
+
+.tracker-transaction-item__icon--income {
+  background: var(--bg-income);
+  color: var(--color-income);
+}
+
+.tracker-transaction-item__icon--expense {
+  background: var(--bg-expense);
+  color: var(--color-expense);
+}
+
+.tracker-transaction-item__detail {
+  flex: 1;
+}
+
+.tracker-transaction-item__title {
+  font-weight: 700;
+  font-size: 1rem;
+  color: #0f172a;
+}
+
+.tracker-transaction-item__date {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.tracker-transaction-item__right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.4rem;
+}
+
+.tracker-transaction-item__amount {
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+.tracker-transaction-item__amount--income {
+  color: var(--color-income);
+}
+
+.tracker-transaction-item__amount--expense {
+  color: var(--color-expense);
+}
+
+.tracker-transaction-item__actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Tombol aksi dengan warna dan lebar seragam */
+.tracker-transaction-item__btn {
+  min-width: 85px;
+  text-align: center;
+  padding: 0.4rem 0.5rem;
+  border-radius: 40px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+}
+
+.tracker-transaction-item__btn--edit {
+  background-color: #10b981;
+  color: white;
+}
+.tracker-transaction-item__btn--edit:hover {
+  background-color: #059669;
+  transform: translateY(-1px);
+}
+
+.tracker-transaction-item__btn--type {
+  background-color: #f59e0b;
+  color: white;
+}
+.tracker-transaction-item__btn--type:hover {
+  background-color: #d97706;
+}
+
+.tracker-transaction-item__btn--delete {
+  background-color: #ef4444;
+  color: white;
+}
+.tracker-transaction-item__btn--delete:hover {
+  background-color: #dc2626;
+}
+
+/* FOOTER */
+.tracker-footer {
+  text-align: center;
+  padding: 1.5rem 0 0.5rem;
+  font-size: 0.75rem;
+  color: #5b6e8c;
+  border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+/* Modal Identitas Pengguna */
+.user-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  font-family: var(--font-family);
+}
+
+.user-modal__content {
+  background: white;
+  border-radius: 32px;
+  max-width: 460px;
+  width: 90%;
+  box-shadow: 0 25px 45px -12px rgba(0,0,0,0.3);
+  animation: modalFadeIn 0.2s ease-out;
+  overflow: hidden;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.user-modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 1.5rem;
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  color: white;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.user-modal__header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.user-modal__close {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  color: white;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.user-modal__close:hover {
+  opacity: 1;
+}
+
+.user-modal__body {
+  padding: 1.5rem;
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.user-modal__avatar {
+  font-size: 4rem;
+  background: #f1f5f9;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.user-modal__info {
+  flex: 1;
+}
+
+.user-modal__info p {
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+  color: #1e293b;
+  border-bottom: 1px dashed #e2e8f0;
+  padding-bottom: 0.3rem;
+}
+
+.user-modal__info strong {
+  color: #0f172a;
+  width: 130px;
+  display: inline-block;
+}
+
+@media (max-width: 500px) {
+  .user-modal__body {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .user-modal__info strong {
+    width: auto;
+    display: inline;
+    margin-right: 0.5rem;
+  }
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .tracker-summary {
+    grid-template-columns: 1fr 1fr;
+  }
+  .tracker-summary__balance {
+    grid-column: span 2;
+  }
+  .tracker-form {
+    grid-template-columns: 1fr 1fr;
+  }
+  .tracker-form__field:nth-child(1) {
+    grid-column: span 2;
+  }
+  .tracker-form__submit {
+    grid-column: span 2;
+  }
+  .tracker-history__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 1rem;
+  }
+  .tracker-summary {
+    grid-template-columns: 1fr;
+  }
+  .tracker-summary__balance {
+    grid-column: span 1;
+  }
+  .tracker-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .tracker-search__form {
+    flex-direction: column;
+  }
+  .tracker-search__submit {
+    width: 100%;
+    padding: 0.7rem;
+  }
+  .tracker-header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+  .tracker-header__user {
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 640px) {
+  .tracker-transaction-item {
+    flex-wrap: wrap;
+  }
+  .tracker-transaction-item__right {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .tracker-transaction-item__actions {
+    gap: 0.3rem;
+  }
+  .tracker-transaction-item__btn {
+    min-width: 70px;
+    padding: 0.3rem 0.3rem;
+  }
+}
