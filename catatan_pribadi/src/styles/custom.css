@@ -1,0 +1,37 @@
+/* Grid 4 kolom untuk desktop */
+@media (min-width: 768px) {
+  .notes-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+}
+
+/* Gaya untuk container tombol */
+.note-item__action {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+/* Gaya tombol hapus (merah) */
+.note-item__action-delete {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  flex: 1;
+}
+
+/* Gaya tombol arsip (kuning) */
+.note-item__action-archive {
+  background-color: #ffc107;
+  color: #212529;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  flex: 1;
+}
