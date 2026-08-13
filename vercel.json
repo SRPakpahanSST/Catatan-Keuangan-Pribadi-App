@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "outputDirectory": "keuangan_pribadi",
+  "builds": [
+    {
+      "src": "main.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "main.py"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "keuangan_pribadi/index.html"
+    }
+  ]
+}
